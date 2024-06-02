@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Історія кіноіндустрії</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+  <header>
+    <nav aria-label="Головна навігація">
+      <ul>
+        <li><a href="home.html">ГОЛОВНА</a></li>
+        <li><a href="history.html">Історія кіноіндустрії</a></li>
+        <li><a href="films.html">Культові фільми</a></li>
+        <li><a href="directors.html">Впливові режисери</a></li>
+        <li><a href="events.html">Події в історії кіно</a></li>
+        <li><a href="discussion.html">Фільм тижня</a></li>
+      </ul>
+    </nav>
+  </header>
+  <main>
+    <section>
+      <h1>Події в історії кіно</h1>
+      <div id="news-section">
+        <!-- Тут будуть відображатися новини -->
+      </div>
+      <div id="admin-section" style="display: none;">
+        <h2>Додати новину</h2>
+        <form id="news-form">
+          <label for="news-title">Заголовок:</label>
+          <input type="text" id="news-title" required>
+          <label for="news-content">Текст новини:</label>
+          <textarea id="news-content" required></textarea>
+          <button type="submit">Додати</button>
+        </form>
+        <button id="clear-data">Очистити дані</button>
+      </div>
+    </section>
+  </main>
+  <footer>
+    <p>&copy; 2024 Історія кіноіндустрії</p>
+  </footer>
+  <script>
+    const apiUrl = 'http://localhost:3000';
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const loggedInUser = localStorage.getItem('loggedInUser');
+      const adminSection = document.getElementById('admin-section');
+
+      // Показуємо адмін-секцію, якщо увійшов адмін
+      if (loggedInUser === 'admin') {
+        adminSection.style.display = 'block';
+      }
+
+      // Завантаження новин з сервера
+      loadNews();
+
+      // Додавання новини
+      document.getElementById('news-form').addEventListener('submit', async function (e) {
+        e.preventDefault();
+        const title = document.getElementById('news-title').value;
+        const content = document.getElementById('news-content').value;
+        const token = localStorage.getItem('token');
+
+        try {
+          const response = await fetch(`${apiUrl}/news`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify({ title, content })
+          });
+
+          if (response.ok) {
+            document.getElementById('news-title').value = '';
+            document.getElementById('news-content').value = '';
+            loadNews();
+          } else {
+            const errorData = await response.json();
+            console.error('Failed to submit news:', errorData.error);
+          }
+        } catch (error) {
+          console.error('Error submitting news:', error);
+        }
+      });
+
+      // Очищення даних
+      document.getElementById('clear-data').addEventListener('click', async function () {
+        const token = localStorage.getItem('token');
+
+        try {
+          const response = await fetch(`${apiUrl}/clear-news`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${token}`
+            }
+          });
+
+          if (response.ok) {
+            loadNews();
+          } else {
+            const errorData = await response.json();
+            console.error('Failed to clear data:', errorData.error);
+          }
+        } catch (error) {
+          console.error('Error clearing data:', error);
+        }
+      });
+    });
+
+    async function loadNews() {
+      const newsSection = document.getElementById('news-section');
+
+      try {
+        const response = await fetch(`${apiUrl}/news`);
+        if (!response.ok) {
+          console.error('Failed to load news:', response.status, response.statusText);
+          return;
+        }
+        const news = await response.json();
+        newsSection.innerHTML = '';
+
+        if (news.length === 0) {
+          newsSection.innerHTML = '<p>No news available</p>';
+        } else {
+          news.forEach(newsItem => {
+            const newsElement = document.createElement('div');
+            newsElement.classList.add('news-item');
+            newsElement.innerHTML = `
+              <h3>${newsItem.title}</h3>
+              <p>${newsItem.content}</p>
+              <small>${new Date(newsItem.date).toLocaleString()}</small>
+              <hr>
+            `;
+            newsSection.appendChild(newsElement);
+          });
+        }
+      } catch (error) {
+        console.error('Error loading news:', error);
+      }
+    }
+  </script>
+</body>
+
+</html>

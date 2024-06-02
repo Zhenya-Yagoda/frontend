@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Історія кіноіндустрії</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <header>
+        <nav aria-label="Головна навігація">
+            <ul>
+                <li><a href="home.html">ГОЛОВНА</a></li>
+                <li><a href="history.html">Історія кіноіндустрії</a></li>
+                <li><a href="films.html">Культові фільми</a></li>
+                <li><a href="directors.html">Впливові режисери</a></li>
+                <li><a href="events.html">Події в історії кіно</a></li>
+                <li><a href="discussion.html">Фільм тижня</a></li>
+                
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section>
+            <h1>Обговорення фільму тижня</h1>
+            <div class="film-info2">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT7w4ezJse1P3zLHGR82JtRTWVFN86tqHQ8Bg&s" alt="Назва фільму" class="film-poster">
+                <div class="film-description2">
+                    <h2>Оппенгеймер</h2>
+                    <p>У розпал Другої світової війни полковник США Леслі Гровс призначає блискучого фізика-теоретика Роберта Оппенгеймера науковим керівником Манхеттенського проєкту. Вся індустріальна міць та інноваційні технології країни йдуть на те, щоб випередити нацистську Німеччину у створенні зброї масового знищення на основі розщеплення ядра атома. Оппенгеймер проводить успішні випробування першої у світі ядерної бомби, що дозволяє наблизити перемогу у війні. Проте чоловіка мучать докори совісті, оскільки його винахід здатний призвести до знищення всього людства...</p>
+                </div>
+            </div>
+
+            <div class="rating-section">
+                <label for="rating">Оцініть фільм:</label>
+                <select id="rating">
+                    <option value="1">☆</option>
+                    <option value="2">☆☆</option>
+                    <option value="3">☆☆☆</option>
+                    <option value="4">☆☆☆☆</option>
+                    <option value="5">☆☆☆☆☆</option>
+                </select>
+                <button id="submit-rating">Оцінити</button>
+            </div>
+            
+            <div id="average-rating-container">
+                <p id="average-rating">Рейтинг: 0.00</p>
+            </div>
+            
+            <div id="comment-form-container">
+                <textarea id="comment-text" placeholder="Ваш коментар"></textarea>
+                <button id="submit-comment">Додати коментар</button>
+            </div>
+            
+            <div id="login-prompt">
+                <p>Будь ласка, <a href="home.html">увійдіть</a> в акаунт, щоб залишити коментар.</p>
+            </div>
+            
+            <div id="comments-list">
+                <!-- Список коментарів буде завантажено тут -->
+            </div>
+
+            <button id="clear-data" style="display: none;">Очистити дані</button>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2024 Історія кіноіндустрії</p>
+    </footer>
+
+    <script src="discussion.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Володар перснів</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <header>
+        <nav aria-label="Головна навігація">
+            <ul>
+                <li><a href="home.html">ГОЛОВНА</a></li>
+                <li><a href="history.html">Історія кіноіндустрії</a></li>
+                <li><a href="films.html">Культові фільми</a></li>
+                <li><a href="directors.html">Впливові режисери</a></li>
+                <li><a href="events.html">Події в історії кіно</a></li>
+                <li><a href="discussion.html">Фільм тижня</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section>
+            <h1>Володар перснів</h1>
+            <img src="https://uaserials.pro/posters/2264.jpg" alt="Володар перснів" style="height: 350px;">
+            <p>Володар перснів - епічний фільм, заснований на романі Джона Рональда Руела Толкіна. Трилогія здобувала велику популярність у світі, а третя частина має найкращі оцінки. У цій частині глядачі знайомляться з персонажами та вступають у світ Середзем'я. Фродо Беггінс, звичайний хоббіт з Шири, спільно зі своїми друзями - Леголасом, Гімлі, Арагорном, Гендальфом та іншими - вирушає в епічну подорож, щоб знищити особливий перстень, який є джерелом великої загрози для всього Середзем'я. Фільм отримав високу оцінку критиків і прихильників, заробивши ряд нагород та номінацій на престижних кінопреміях, а третя частина "Володар перснів: Повернення короля" отримала 11 премій "Оскар", зокрема за найкращий фільм та режисуру. Він визнаний одним з найкращих фільмів усіх часів та залишається улюбленою класикою серед прихильників фентезі.</p>
+            
+            <div class="rating-section">
+                <label for="rating">Оцініть фільм:</label>
+                <select id="rating">
+                    <option value="1">☆</option>
+                    <option value="2">☆☆</option>
+                    <option value="3">☆☆☆</option>
+                    <option value="4">☆☆☆☆</option>
+                    <option value="5">☆☆☆☆☆</option>
+                </select>
+                <button id="submit-rating">Оцінити</button>
+            </div>
+
+            <div id="average-rating-container">
+                <p id="average-rating">Рейтинг: 0.00</p>
+            </div>
+
+            <div id="comment-form-container">
+                <textarea id="comment-text" placeholder="Ваш коментар"></textarea>
+                <button id="submit-comment">Додати коментар</button>
+            </div>
+
+            <div id="login-prompt">
+                <p>Будь ласка, <a href="home.html">увійдіть</a> в акаунт, щоб залишити коментар.</p>
+            </div>
+
+            <div id="comments-list">
+                <!-- Список коментарів буде завантажено тут -->
+            </div>
+
+            <button id="clear-data" style="display: none;">Очистити дані</button>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2024 Історія кіноіндустрії</p>
+    </footer>
+    <script>
+        const apiUrl = 'http://localhost:3000';
+        const filmId = 6;  // Ідентифікатор фільму 
+
+           // Перевірка стану входу при завантаженні сторінки
+    document.addEventListener('DOMContentLoaded', () => {
+      const loggedInUser = localStorage.getItem('loggedInUser');
+      const commentFormContainer = document.getElementById('comment-form-container');
+      const loginPrompt = document.getElementById('login-prompt');
+      const ratingSection = document.querySelector('.rating-section');
+      const clearDataButton = document.getElementById('clear-data');
+
+      if (loggedInUser) {
+        commentFormContainer.style.display = 'block';
+        loginPrompt.style.display = 'none';
+        ratingSection.style.display = 'block';
+
+        // Показуємо кнопку "Очистити" лише для адміну
+        const token = localStorage.getItem('token');
+        const payload = JSON.parse(atob(token.split('.')[1]));
+        if (payload.role === 'admin') {
+          clearDataButton.style.display = 'block';
+        } else {
+          clearDataButton.style.display = 'none';
+        }
+      } else {
+        commentFormContainer.style.display = 'none';
+        loginPrompt.style.display = 'block';
+        ratingSection.style.display = 'none';
+        clearDataButton.style.display = 'none';
+      }
+
+      loadComments();
+      updateAverageRating();
+    });
+
+    // Завантаження коментарів з сервера
+    async function loadComments() {
+      try {
+        const response = await fetch(`${apiUrl}/comments?film_id=${filmId}`);
+        if (!response.ok) {
+          console.error('Failed to load comments:', response.status, response.statusText);
+          return;
+        }
+        const comments = await response.json();
+        const commentsList = document.getElementById('comments-list');
+        commentsList.innerHTML = '';
+
+        if (comments.length === 0) {
+          commentsList.innerHTML = '<p>No comments yet</p>';
+        } else {
+          comments.forEach(comment => {
+            const commentElement = document.createElement('div');
+            commentElement.classList.add('comment');
+            commentElement.innerHTML = `
+              <p><strong>${comment.user}</strong></p>
+              <p>${comment.text}</p>
+              <hr>
+            `;
+            commentsList.appendChild(commentElement);
+          });
+        }
+      } catch (error) {
+        console.error('Error loading comments:', error);
+      }
+    }
+
+    // Обробка форми додавання коментаря
+    document.getElementById('submit-comment').addEventListener('click', async function (e) {
+      e.preventDefault();
+      const commentText = document.getElementById('comment-text').value;
+      const token = localStorage.getItem('token');
+
+      if (!commentText || !token) {
+        console.error('Comment text or token is missing');
+        return;
+      }
+
+      const response = await fetch(`${apiUrl}/comments`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify({ filmId: filmId, text: commentText })
+      });
+
+      if (response.ok) {
+        document.getElementById('comment-text').value = '';
+        loadComments();
+      } else {
+        const errorData = await response.json();
+        console.error('Failed to submit comment:', errorData.error);
+      }
+    });
+
+    // Обробка рейтингу
+    document.getElementById('submit-rating').addEventListener('click', async function () {
+      const rating = parseInt(document.getElementById('rating').value);
+      const token = localStorage.getItem('token');
+
+      const response = await fetch(`${apiUrl}/ratings`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify({ filmId: filmId, rating: rating })
+      });
+
+      if (response.ok) {
+        updateAverageRating();
+        hideRatingForm();
+      } else {
+        console.error('Failed to submit rating');
+      }
+    });
+
+    // Оновлення середнього рейтингу
+    async function updateAverageRating() {
+      try {
+        const response = await fetch(`${apiUrl}/ratings/average?film_id=${filmId}`);
+        if (!response.ok) {
+          console.error('Failed to load average rating');
+          return;
+        }
+        const data = await response.json();
+        const average = data.average_rating ? Number(data.average_rating).toFixed(2) : '0.00';
+
+        document.getElementById('average-rating').textContent = `Рейтинг: ${average}`;
+      } catch (error) {
+        console.error('Error loading average rating:', error);
+      }
+    }
+
+    function hideRatingForm() {
+      document.querySelector('.rating-section').style.display = 'none';
+    }
+
+    // Додавання події для кнопки очищення даних
+    document.getElementById('clear-data').addEventListener('click', async function () {
+      console.log('Очистити дані натиснуто');
+      const token = localStorage.getItem('token');
+      console.log('Token:', token);  // Відлагоджувальне повідомлення
+      const response = await fetch(`${apiUrl}/clear`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify({ filmId: filmId })  // Додаємо filmId у тіло запиту
+      });
+
+      if (response.ok) {
+        console.log('Дані очищені');
+        loadComments();
+        updateAverageRating();
+      } else {
+        console.error('Failed to clear data');
+      }
+    });
+    </script>
+</body>
+
+</html>

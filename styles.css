@@ -1,0 +1,606 @@
+/* Загальні стилі */
+body {
+    font-family: Georgia, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+
+header {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 0.8em;
+    font-size: 1.2em;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+}
+
+nav ul li {
+    display: inline;
+    margin-right: 1em;
+}
+
+nav ul li a {
+    color: #fff;
+    text-decoration: none;
+}
+
+nav ul li a:hover {
+    text-decoration: underline;
+}
+
+main {
+    flex: 1;
+    padding: 2em;
+}
+
+section {
+    margin-bottom: 2em;
+}
+
+
+
+.table-with-image {
+    display: flex;
+    justify-content: space-between;
+    align-items: center; 
+    margin: 20px 0;
+}
+
+table {
+    width: 60%; 
+    border-collapse: collapse;
+    margin-bottom: 1em;
+    margin-right: auto;
+    margin-left: auto; 
+    background-color: #f9f9f9; 
+    border: 1px solid #ddd; 
+}
+
+table, th, td {
+    border: 1px solid #333;
+    
+}
+
+th, td {
+    padding: 0.5em ;
+    text-align: center;
+}
+
+
+table tr:first-child th {
+    font-weight: bold; 
+}
+
+aside {
+    float:center;
+    width:30%;
+    margin-left: 10px;
+    text-align: centre;
+}
+
+/* Стиль для тексту з плаваючими елементами */
+.text-section {
+    margin-top: 30px;
+    display:  flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+/* Центрування заголовка h2 всередині text-section */
+.text-section h2 {
+    text-align: center;
+    font-size: 1.5em; 
+}
+.text-with-floats {
+    max-width: 800px; 
+    margin: 0 auto;
+    
+}
+.text-section li {
+    list-style-position: inside;
+    margin-bottom: 10px;
+}
+.text-section ol {
+    padding: 0;
+    font-size: 1.2em; 
+}
+.float-left  , .float-right {
+    margin: 10px;
+}
+.float-left  img, .float-right img {
+    height: 300px; 
+    width: auto; 
+}
+.float-left {
+    float: left;
+    margin-right: 20px;
+}
+
+.float-right {
+    float: right;
+    margin-left: 20px;
+}
+
+/* -------- */
+.content-container {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding: 20px ;
+    max-width: 1200px;
+    margin: auto;
+}
+
+.text-content {
+    flex: 1;
+    margin-right: 20px;
+    margin-left: 20px;
+    text-align: center;
+}
+
+.image-container {
+    position: relative;
+    width: 350px;
+    flex-shrink: 0;
+}
+
+.image-container img {
+    width: 100%;
+    height: auto;
+}
+
+.image-container .centered-text {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 10px 0;
+    text-align: center;
+    font-size: 1.2em;
+    text-decoration: none;
+}
+
+.content {
+    padding: 20px;
+}
+/* ------------ */
+
+/* Селектор класу */
+.highlight {
+    background-color: yellow;
+}
+
+/* Селектор ідентифікатора */
+#unique-element {
+    color: rgb(68, 7, 25);
+    font-weight: bold;
+}
+
+a {
+    transition: color 0.3s ease;
+}
+
+/* Псевдоклас :hover для посилання */
+a:hover {
+    color: rgb(176, 176, 209);
+}
+
+/* Псевдоелемент ::after для заголовка */
+h1::after {
+    content: " 📽️";
+}
+
+/* Комбінатор + для суміжних елементів */
+h1 + p {
+    font-style: italic;
+}
+
+/* Селектор атрибуту для посилань */
+a[href*="home"] {
+    color: rgb(214, 222, 237);
+    font-size: 1.5em; 
+}
+
+
+footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+}
+/* -------------- */
+#register-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    width: 300px;
+    margin: auto;
+}
+
+#register-form label {
+    align-self: flex-start; 
+    margin-top: 10px;
+}
+
+#register-form input {
+    padding: 10px;
+    margin-top: 5px;
+    width: 100%; 
+    box-sizing: border-box; 
+}
+
+#register-form button {
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+    width: 100%; 
+    box-sizing: border-box; 
+}
+
+#register-form button:hover {
+    background-color: #45a049;
+}
+
+#login-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    width: 300px;
+    margin: auto;
+}
+
+#login-form label {
+    align-self: flex-start; 
+    margin-top: 10px;
+}
+
+#login-form input {
+    padding: 10px;
+    margin-top: 5px;
+    width: 100%; 
+    box-sizing: border-box; 
+}
+
+#login-form button {
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+#login-form button:hover {
+    background-color: #45a049;
+}
+
+#messageContainer, #registerMessageContainer {
+    margin-top: 20px;
+    color: red;
+    text-align: center; 
+}
+
+#logoutButton {
+    margin-top: 5px;
+    padding: 5px;
+    background-color:rgb(111, 25, 38);
+    color: white;
+    border: none;
+    cursor: pointer;
+    width: 100%; 
+    box-sizing: border-box; 
+}
+
+/* ------------- */
+
+.director-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px;
+  }
+
+  .director-card {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin: 20px 0;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+    width: 80%;
+  }
+
+  .director-card img {
+    width: 200px;
+    height: auto;
+    border-radius: 10px;
+    margin-right: 20px;
+  }
+
+  .director-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .director-info h2 {
+    margin: 0 0 10px 0;
+  }
+
+  .director-info p {
+    margin: 5px 0;
+  } 
+
+
+
+.film-info {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+}
+
+.film-info p {
+    margin: 5px 0;
+}
+
+
+
+#search-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+#search-input {
+    padding: 10px;
+    width: 100%;
+    max-width: 1000px; 
+    font-size: 14px;
+    box-sizing: border-box; 
+    text-align: center;
+    background-color: #fdfdfd; 
+    border: 2px solid #9b9191; 
+}
+
+/* ============ */
+
+/* Стилі для інформації про фільм */
+.film-info2 {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 20px;
+    background-color: #f5f1f1;
+    border: 1px solid #695e5e;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+}
+
+.film-poster {
+    max-width: 200px;
+    margin-right: 20px;
+}
+
+.film-description2 {
+    flex: 1;
+}
+
+
+/* Стилі для секції коментарів */
+.comment {
+    word-wrap: break-word; 
+    word-break: break-word; 
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    background-color: #f8f8f8;
+}
+
+/* Стиль для повідомлення про середній рейтинг */
+#average-rating-container {
+    margin-top: 20px;
+}
+
+#average-rating {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+#login-prompt a {
+    color: #007BFF;
+    text-decoration: underline;
+}
+
+#login-prompt a:hover {
+    color: #0056b3;
+}
+
+
+
+/* Основні стилі для секції рейтингу */
+.rating-section {
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    background-color: #f8f8f8;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+#rating {
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    margin-right: 10px; 
+    width: auto; 
+    box-sizing: border-box; 
+}
+
+#submit-rating {
+    padding: 10px 20px; 
+    background-color: #714759;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 5px;
+    height: 42px; 
+    transition: background-color 0.3s ease;
+}
+
+#submit-rating:hover {
+    background-color: #4a051b;
+}
+/* Стилі для повідомлення про середній рейтинг */
+#average-rating-container {
+    margin-bottom: 20px;
+    font-size: 18px;
+    font-weight: bold;
+    text-align: left;
+    
+}
+
+
+ /* Стилі для форми коментарів */
+#comment-form-container {
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #f8f8f8;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 80%; 
+    max-width: 800px;
+    margin: 0 auto; 
+}
+
+#comment-form-container textarea {
+    padding: 10px;
+    width: 100%;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    box-sizing: border-box; 
+    margin-bottom: 10px;
+    transition: border-color 0.3s ease;
+}
+
+#comment-form-container textarea:focus {
+    border-color:  #4a051b;
+}
+
+#submit-comment {
+    padding: 10px;
+    background-color: #714759;
+    color: white;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    font-size: 16px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+#submit-comment:hover {
+    background-color:  #4a051b;
+}
+
+
+/* Сітка для фільмів */
+.film-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr); 
+    gap: 20px;
+}
+
+.film-item {
+    text-align: center;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+
+.film-item img {
+    max-width: 100%;
+    height: 200px; 
+    object-fit: cover; 
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.film-item h2 {
+    font-size: 1.2em;
+    margin: 0 0 10px;
+}
+
+.film-item p {
+    font-size: 0.9em;
+    color: #555;
+}
+
+
+/* Стилі для форми додавання новин */
+#admin-section {
+    background-color: #f1f1f1;
+    padding: 20px;
+    border-radius: 5px;
+    margin-top: 20px;
+}
+
+#admin-section form {
+    display: flex;
+    flex-direction: column;
+}
+
+#admin-section label {
+    margin-top: 10px;
+}
+
+#admin-section input,
+#admin-section textarea {
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+#admin-section button {
+    margin-top: 10px;
+    padding: 10px;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#admin-section button:hover {
+    background-color: #555;
+}

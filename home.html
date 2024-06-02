@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="uk">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Історія кіноіндустрії</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <header>
+        <nav aria-label="Головна навігація">
+            <ul>
+                <li><a href="home.html">ГОЛОВНА</a></li>
+                <li><a href="history.html">Історія кіноіндустрії</a></li>
+                <li><a href="films.html">Культові фільми</a></li>
+                <li><a href="directors.html">Впливові режисери</a></li>
+                <li><a href="events.html">Події в історії кіно</a></li>
+                <li><a href="discussion.html">Фільм тижня</a></li>
+
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section class="content-container">
+            <div class="image-container">
+                <a href="discussion.html">
+                    <img src="https://i.pinimg.com/564x/c1/62/d5/c162d5624973faa20a334ac40d679b95.jpg"
+                        alt="Приєднайся до обговорення">
+                    <div class="centered-text">Приєднайся до обговорення фільму тижня!</div>
+                </a>
+            </div>
+            <div class="text-content">
+                <h1>Ласкаво просимо до сайту присвяченому історії кіноіндустрії</h1>
+                <p id="welcome-text">Для того, щоб мати змогу брати участь в обговореннях, зареєструйтеся або увійдіть у акаунт.</p>
+                
+                <form id="login-form">
+                    <label for="username">Логін:</label>
+                    <input type="text" id="username" name="username" required>
+                    <label for="password">Пароль:</label>
+                    <input type="password" id="password" name="password" required>
+                    <button type="button" id="loginButton">Увійти</button>
+                </form>
+                
+                <div id="messageContainer"></div>
+                
+                <p id="register-prompt">Ще не маєте акаунта? <button id="showRegisterForm">Зареєструватися</button></p>
+                
+                <form id="register-form" style="display: none;">
+                    <label for="newUsername">Логін:</label>
+                    <input type="text" id="newUsername" name="newUsername" required>
+                    <label for="newPassword">Пароль:</label>
+                    <input type="password" id="newPassword" name="newPassword" required>
+                    <label for="name">Ім'я:</label>
+                    <input type="text" id="name" name="name" required>
+                    <button type="button" id="registerButton">Зареєструватися</button>
+                </form>
+                
+                <div id="registerMessageContainer"></div>
+            </div>
+            
+            <div id="account-section" style="display: none;">
+                <p id="unique-element">Ви зараз в акаунті</p>
+                <button id="logoutButton">Вийти з акаунта</button>
+            </div>
+            
+            
+            
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2024 Історія кіноіндустрії</p>
+    </footer>
+    <script src="script.js"></script>
+
+</body>
+
+</html>
